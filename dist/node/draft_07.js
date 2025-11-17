@@ -3,8 +3,8 @@
 /*
  * BSD-2-Clause License
  *
- * Original source code is copyright (c) 2019-2022 Jeremy Rylan
- * <https://github.com/jrylan>
+ * Original source code is copyright (c) 2019-2025 Remy Rylan
+ * <https://github.com/RemyRylan>
  *
  * Documentation and keyword descriptions are copyright (c) 2018 IETF Trust
  * <https://www.ietf.org/>, Austin Wright <aaa@bzfx.net>, Henry Andrews

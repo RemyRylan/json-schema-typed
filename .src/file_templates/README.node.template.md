@@ -97,10 +97,10 @@ This library follows [semantic versioning](https://semver.org).
 
 ## Maintainers
 
-- [Jeremy Rylan](https://github.com/jrylan)
+- [Remy Rylan](https://github.com/RemyRylan)
 
 ## License
 
 [BSD-2-Clause][license]
 
-[license]: https://github.com/jrylan/json-schema-typed/blob/main/dist/node/LICENSE.md
+[license]: https://github.com/RemyRylan/json-schema-typed/blob/main/dist/node/LICENSE.md

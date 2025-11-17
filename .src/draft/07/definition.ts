@@ -18,8 +18,8 @@ export default defineValidationSpec({
   $license: desc`
     BSD-2-Clause License
 
-    Original source code is copyright (c) 2019-2022 Jeremy Rylan
-    <https://github.com/jrylan>
+    Original source code is copyright (c) 2019-2025 Remy Rylan
+    <https://github.com/RemyRylan>
 
     {COPYRIGHT}
 

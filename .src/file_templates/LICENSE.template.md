@@ -1,7 +1,7 @@
 BSD 2-Clause License
 
-Original source code is copyright (c) 2019-{YEAR} Jeremy Rylan
-<https://github.com/jrylan>
+Original source code is copyright (c) 2019-{YEAR} Remy Rylan
+<https://github.com/RemyRylan>
 
 All JSON Schema documentation and descriptions are copyright (c):
 

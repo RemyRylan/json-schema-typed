@@ -20,7 +20,7 @@ library for data validation.
    import {
      Format,
      type JSONSchema,
-   } from "https://deno.land/x/json_schema_typed/draft_latest.ts";
+   } from "https://deno.land/x/json_schema_typed@v8.0.2/draft_latest.ts";
 
    const schema: JSONSchema = {
      properties: {
@@ -60,8 +60,8 @@ This library follows [semantic versioning](https://semver.org).
 
 ## Maintainers
 
-- [Jeremy Rylan](https://github.com/jrylan)
+- [Remy Rylan](https://github.com/RemyRylan)
 
 ## License
 
-[BSD-2-Clause](https://github.com/jrylan/json-schema-typed/blob/main/dist/deno/LICENSE.md)
+[BSD-2-Clause](https://github.com/RemyRylan/json-schema-typed/blob/main/dist/deno/LICENSE.md)

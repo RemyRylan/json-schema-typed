@@ -2,15 +2,15 @@
   "name": "json-schema-typed",
   "description": "JSON Schema TypeScript definitions with complete inline documentation.",
   "license": "BSD-2-Clause",
-  "version": "8.0.1",
-  "homepage": "https://github.com/jrylan/json-schema-typed/tree/main/dist/node",
+  "version": "8.0.2",
+  "homepage": "https://github.com/RemyRylan/json-schema-typed/tree/main/dist/node",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jrylan/json-schema-typed.git"
+    "url": "https://github.com/RemyRylan/json-schema-typed.git"
   },
   "author": {
-    "name": "Jeremy Rylan",
-    "url": "https://github.com/jrylan"
+    "name": "Remy Rylan",
+    "url": "https://github.com/RemyRylan"
   },
   "main": "./draft_2020_12.js",
   "types": "./draft_2020_12.d.ts",
