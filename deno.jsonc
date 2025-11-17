@@ -3,5 +3,13 @@
     "files": {
       "exclude": ["dist/"]
     }
+  },
+  "imports": {
+    "@std/crypto": "jsr:@std/crypto@^1.0.5",
+    "@std/fs": "jsr:@std/fs@^1.0.19",
+    "@std/io": "jsr:@std/io@^0.225.2",
+    "@std/path": "jsr:@std/path@^1.1.2",
+    "@std/streams": "jsr:@std/streams@^1.0.13",
+    "typescript": "npm:typescript@^5.9.3"
   }
 }

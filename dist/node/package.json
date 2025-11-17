@@ -12,13 +12,26 @@
     "name": "Jeremy Rylan",
     "url": "https://github.com/jrylan"
   },
-  "main": "./draft-2020-12.js",
+  "main": "./draft_2020_12.js",
+  "types": "./draft_2020_12.d.ts",
   "type": "module",
   "exports": {
-    ".": "./draft-2020-12.js",
-    "./draft-07": "./draft-07.js",
-    "./draft-2019-09": "./draft-2019-09.js",
-    "./draft-2020-12": "./draft-2020-12.js"
+    ".": {
+      "types": "./draft_2020_12.d.ts",
+      "default": "./draft_2020_12.js"
+    },
+    "./draft-07": {
+      "types": "./draft_07.d.ts",
+      "default": "./draft_07.js"
+    },
+    "./draft-2019-09": {
+      "types": "./draft_2019_09.d.ts",
+      "default": "./draft_2019_09.js"
+    },
+    "./draft-2020-12": {
+      "types": "./draft_2020_12.d.ts",
+      "default": "./draft_2020_12.js"
+    }
   },
   "keywords": [
     "jsonschema",

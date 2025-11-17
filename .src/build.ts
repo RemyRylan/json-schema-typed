@@ -1,13 +1,14 @@
-import * as fs from "std/fs/mod.ts";
-import * as path from "std/path/mod.ts";
+import * as fs from "@std/fs";
+import * as path from "@std/path";
 import type * as types from "./types.ts";
 import { expandSourcePlaceholders } from "./utils/source_code.ts";
 import { formatMarkdown } from "./utils/format_markdown.ts";
 import { formatDefinitionDescriptions } from "./utils/format_definition_descriptions.ts";
 import { fileChecksum } from "./utils/checksum.ts";
-import checksums from "./checksums.json" assert { type: "json" };
+import { compileTypeScript } from "./tsc.ts";
+import checksums from "./checksums.json" with { type: "json" };
 import { VERSION } from "./version.ts";
-import packageJson from "../dist/node/package.json" assert { type: "json" };
+import packageJson from "../dist/node/package.json" with { type: "json" };
 
 // -----------------------------------------------------------------------------
 
@@ -50,7 +51,6 @@ drafts.sort((a, b) => a.localeCompare(b));
 // Process each draft
 
 for (const draftId of drafts) {
-  const nodeDraftId = draftId.replaceAll("_", "-");
   const draftDir = path.join(SRC_DIR, "draft", draftId);
   const draftDefFilename = path.join(draftDir, "definition.ts");
   const draftDefChecksum = await fileChecksum(draftDefFilename);
@@ -105,7 +105,7 @@ for (const draftId of drafts) {
     draftSpec as unknown as types.ValidationSpecDefinition,
   );
 
-  const outputFilename = path.join(NODE_DIR, `draft-${nodeDraftId}.ts`);
+  const outputFilename = path.join(DENO_DIR, `draft_${draftId}.ts`);
   await Deno.writeTextFile(
     outputFilename,
     [
@@ -115,43 +115,17 @@ for (const draftId of drafts) {
       modCode,
     ].join("\n"),
   );
-  await Deno.run({ cmd: ["deno", "fmt", "--quiet", outputFilename] }).status();
-
-  // Copy to the deno directory
-  await fs.copy(
-    outputFilename,
-    path.join(DENO_DIR, `draft_${draftId}.ts`),
-    { overwrite: true },
-  );
+  const fmtCommand = new Deno.Command("deno", {
+    args: ["fmt", "--quiet", outputFilename],
+  });
+  await fmtCommand.output();
 
   // -------------------------------------------------------------------------
   // Compile to JS
   // -------------------------------------------------------------------------
-  const { files } = await Deno.emit(outputFilename, {
-    bundle: "module",
-    compilerOptions: { target: "es6" },
-  });
-
-  const js = files["deno:///bundle.js"];
-  const map = files["deno:///bundle.js.map"];
-
-  // Write to the node directory
-  const mapJson = JSON.parse(map) as { sources: string[] };
-  mapJson.sources = mapJson.sources.map((source) => path.basename(source));
-
-  await Deno.writeTextFile(
-    path.join(NODE_DIR, `draft-${nodeDraftId}.js`),
-    [
-      `/// <reference types="./draft-${nodeDraftId}.ts" />`,
-      "// @generated",
-      js,
-      `//# sourceMappingURL=draft-${nodeDraftId}.js.map`,
-    ].join("\n"),
-  );
-
-  await Deno.writeTextFile(
-    path.join(NODE_DIR, `draft-${nodeDraftId}.js.map`),
-    JSON.stringify(mapJson),
+  await compileTypeScript(
+    outputFilename,
+    NODE_DIR,
   );
 
   console.log(`draft_${draftId}: complete`);
@@ -184,8 +158,6 @@ const latestDraft = [...drafts].filter((draftId) => {
 if (latestDraft === undefined) {
   throw new Error("TODO");
 }
-
-const nodeLatestDraft = latestDraft.replaceAll("_", "-");
 
 await Deno.writeTextFile(
   path.join(DENO_DIR, "draft_latest.ts"),
@@ -224,11 +196,10 @@ for (const readmeFilename of readmeFilenames) {
       })
       .replaceAll("{LATEST_DRAFT}", latestDraft),
   );
-  const p = Deno.run({
-    cmd: ["deno", "fmt", "--quiet", readmeFilename.output],
+  const fmtCommand = new Deno.Command("deno", {
+    args: ["fmt", "--quiet", readmeFilename.output],
   });
-  await p.status();
-  p.close();
+  await fmtCommand.output();
 }
 
 // -----------------------------------------------------------------------------
@@ -276,16 +247,26 @@ for (const dir of ALL_DIST_DIRS) {
 // -----------------------------------------------------------------------------
 {
   packageJson.version = VERSION;
-  packageJson.main = `./draft-${nodeLatestDraft}.js`;
+  packageJson.main = `./draft_${latestDraft}.js`;
+  packageJson.types = `./draft_${latestDraft}.d.ts`;
   // @ts-expect-error this is valid
   packageJson.exports = {
-    ".": `./draft-${nodeLatestDraft}.js`,
+    ".": {
+      types: `./draft_${latestDraft}.d.ts`,
+      default: `./draft_${latestDraft}.js`,
+    },
     ...Object.fromEntries(
       drafts.map((
         draftId,
       ) => {
         const nodeDraftId = draftId.replaceAll("_", "-");
-        return [`./draft-${nodeDraftId}`, `./draft-${nodeDraftId}.js`];
+        return [
+          `./draft-${nodeDraftId}`,
+          {
+            types: `./draft_${draftId}.d.ts`,
+            default: `./draft_${draftId}.js`,
+          },
+        ];
       }),
     ),
   };

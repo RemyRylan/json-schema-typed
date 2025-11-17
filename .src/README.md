@@ -11,7 +11,7 @@ moment.
 ## Building
 
 ```sh
-deno run -A --import-map=import_map.json --unstable ./.src/build.ts
+deno run -A .src/build.ts
 ```
 
 By default, the build script will skip building drafts that have no
@@ -19,7 +19,7 @@ modifications to their `definition.ts` file. If you need to force a rebuild, add
 `--force` onto the end of the build command:
 
 ```sh
-deno run -A --import-map=import_map.json --unstable ./.src/build.ts --force
+deno run -A .src/build.ts --force
 ```
 
 ## Adding a new draft
