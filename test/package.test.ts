@@ -11,15 +11,16 @@ import { readFileSync } from "node:fs";
 import { test } from "node:test";
 
 type PackEntry = { path: string; size: number };
-type PackResult = Array<{ files: PackEntry[]; size: number; unpackedSize: number }>;
+type PackInfo = { files: PackEntry[]; size: number; unpackedSize: number };
 
 /**
- * Runs `npm pack --dry-run --json`. Under `npm run`, npm exposes its own CLI
- * entry point as `npm_execpath`, so we run it through the current Node binary
- * — portable, and no shell needed (on Windows `npm` is a `.cmd` shim that
- * cannot be spawned directly). Outside `npm run`, fall back to the shell.
+ * Runs `npm pack --dry-run --json` and returns the package's pack info. Under
+ * `npm run`, npm exposes its own CLI entry point as `npm_execpath`, so we run
+ * it through the current Node binary — portable, and no shell needed (on
+ * Windows `npm` is a `.cmd` shim that cannot be spawned directly). Outside
+ * `npm run`, fall back to the shell.
  */
-const npmPackDryRun = (): PackResult => {
+const npmPackDryRun = (): PackInfo => {
   const args = ["pack", "--dry-run", "--json", "--ignore-scripts"];
   const options: ExecFileSyncOptionsWithStringEncoding = {
     encoding: "utf8",
@@ -29,10 +30,15 @@ const npmPackDryRun = (): PackResult => {
   const stdout = npmCli
     ? execFileSync(process.execPath, [npmCli, ...args], options)
     : execFileSync("npm", args, { ...options, shell: true });
-  return JSON.parse(stdout) as PackResult;
+  // npm 10 prints an array of packages; npm 12 prints an object keyed by
+  // package name. Both carry the same per-package fields.
+  const parsed = JSON.parse(stdout) as PackInfo[] | Record<string, PackInfo>;
+  const info = Array.isArray(parsed) ? parsed[0] : Object.values(parsed)[0];
+  assert.ok(info && Array.isArray(info.files), `unexpected npm pack output: ${stdout.slice(0, 200)}`);
+  return info;
 };
 
-const [pack] = npmPackDryRun();
+const pack = npmPackDryRun();
 
 test("package ships only root-level modules and metadata", () => {
   for (const { path } of pack.files) {
