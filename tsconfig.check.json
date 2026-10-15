@@ -1,0 +1,14 @@
+{
+  // Audits the emitted declaration files as a strict consumer would compile
+  // them. Run with `npm run check`.
+  "compilerOptions": {
+    "noEmit": true,
+    "strict": true,
+    "exactOptionalPropertyTypes": true,
+    "skipLibCheck": false,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "types": ["node"]
+  },
+  "include": ["*.d.ts"]
+}

@@ -1,0 +1,13 @@
+{
+  // The emitted declarations compiled with the oldest supported TypeScript
+  // (see CI). No @types so that old compilers are not tripped by @types/node.
+  "compilerOptions": {
+    "noEmit": true,
+    "strict": true,
+    "skipLibCheck": false,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "types": []
+  },
+  "include": ["*.d.ts", "test/types.floor.ts"]
+}

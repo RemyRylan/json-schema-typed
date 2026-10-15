@@ -1,6 +1,6 @@
-BSD 2-Clause License
+BSD 3-Clause License
 
-Original source code is copyright (c) 2019-2025 Remy Rylan
+Original source code is copyright (c) 2019-2026 Remy Rylan
 <https://github.com/RemyRylan>
 
 All JSON Schema documentation and descriptions are copyright (c):
@@ -21,17 +21,20 @@ Gary Court <gary.court@gmail.com>, and SitePen (USA) <https://www.sitepen.com/>.
 <fgaliegue@gmail.com>, Kris Zyp <kris@sitepen.com>, Gary Court
 <gary.court@gmail.com>, and SitePen (USA) <https://www.sitepen.com/>.
 
-2018 [draft-7] IETF Trust <https://www.ietf.org/>, Austin Wright <aaa@bzfx.net>,
-Henry Andrews <henry@cloudflare.com>, Geraint Luff <luffgd@gmail.com>, and
-Cloudflare, Inc. <https://www.cloudflare.com/>.
+2018 [draft-07] IETF Trust <https://www.ietf.org/>, Austin Wright
+<aaa@bzfx.net>, Henry Andrews <henry@cloudflare.com>, Geraint Luff
+<luffgd@gmail.com>, and Cloudflare, Inc. <https://www.cloudflare.com/>.
 
-2019 [draft-2019-09] IETF Trust <https://www.ietf.org/>, Austin Wright
-<aaa@bzfx.net>, Henry Andrews <andrews_henry@yahoo.com>, Ben Hutton
-<bh7@sanger.ac.uk>, and Greg Dennis <gregsdennis@yahoo.com>.
+2019 [2019-09] IETF Trust <https://www.ietf.org/>, Austin Wright <aaa@bzfx.net>,
+Henry Andrews <andrews_henry@yahoo.com>, Ben Hutton <bh7@sanger.ac.uk>, and Greg
+Dennis <gregsdennis@yahoo.com>.
 
-2020 [draft-2020-12] IETF Trust <https://www.ietf.org/>, Austin Wright
-<aaa@bzfx.net>, Henry Andrews <andrews_henry@yahoo.com>, Ben Hutton
-<ben@jsonschema.dev>, and Greg Dennis <gregsdennis@yahoo.com>.
+2020 [2020-12] IETF Trust <https://www.ietf.org/>, Austin Wright <aaa@bzfx.net>,
+Henry Andrews <andrews_henry@yahoo.com>, Ben Hutton <ben@jsonschema.dev>, and
+Greg Dennis <gregsdennis@yahoo.com>.
+
+2022 [v1] JSON Schema Specification Authors
+<https://github.com/json-schema-org/json-schema-spec>.
 
 All rights reserved.
 
@@ -44,6 +47,10 @@ are permitted provided that the following conditions are met:
 2. Redistributions in binary form must reproduce the above copyright notice,
    this list of conditions and the following disclaimer in the documentation
    and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its contributors
+   may be used to endorse or promote products derived from this software without
+   specific prior written permission.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED

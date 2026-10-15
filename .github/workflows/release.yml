@@ -1,0 +1,42 @@
+# Publishes to npm when a `v*` tag is pushed, using npm trusted publishing
+# (OIDC) — no npm token is stored in GitHub. Provenance is generated
+# automatically (see `publishConfig.provenance` in package.json).
+#
+# One-time setup on npmjs.com: package → Settings → Trusted publisher →
+# GitHub Actions: owner RemyRylan, repository json-schema-typed,
+# workflow filename release.yml.
+
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+  id-token: write # required for OIDC trusted publishing + provenance
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: npm
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          cache: npm
+      - name: Ensure npm supports trusted publishing (>= 11.5.1)
+        run: npm install -g npm@latest && npm --version
+      - run: npm ci
+      - name: Tag must match package.json version
+        run: |
+          pkg="v$(node -p "require('./package.json').version")"
+          if [ "$pkg" != "${GITHUB_REF_NAME}" ]; then
+            echo "package.json is $pkg but tag is ${GITHUB_REF_NAME}"; exit 1
+          fi
+      - run: npm run build
+      - run: git diff --exit-code
+      - run: npm test
+      - run: npm publish

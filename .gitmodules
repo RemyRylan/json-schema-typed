@@ -1,16 +1,19 @@
-[submodule ".src/draft/07/spec"]
-	path = .src/draft/07/spec
-	url = git@github.com:json-schema-org/json-schema-spec.git
+[submodule "src/draft/07/spec"]
+	path = src/draft/07/spec
+	url = https://github.com/json-schema-org/json-schema-spec.git
 	branch = draft-07
-[submodule ".src/draft/2019_09/spec"]
-	path = .src/draft/2019_09/spec
-	url = git@github.com:json-schema-org/json-schema-spec.git
+[submodule "src/draft/2019_09/spec"]
+	path = src/draft/2019_09/spec
+	url = https://github.com/json-schema-org/json-schema-spec.git
 	branch = 2019-09
-[submodule ".src/draft/2020_12/spec"]
-	path = .src/draft/2020_12/spec
-	url = git@github.com:json-schema-org/json-schema-spec.git
+[submodule "src/draft/2020_12/spec"]
+	path = src/draft/2020_12/spec
+	url = https://github.com/json-schema-org/json-schema-spec.git
 	branch = 2020-12
-[submodule ".src/draft/next/spec"]
-	path = .src/draft/next/spec
-	url = git@github.com:json-schema-org/json-schema-spec.git
-	branch = draft-next
+[submodule "src/draft/v1/spec"]
+	path = src/draft/v1/spec
+	url = https://github.com/json-schema-org/json-schema-spec.git
+	branch = main
+[submodule "test/suite/JSON-Schema-Test-Suite"]
+	path = test/suite/JSON-Schema-Test-Suite
+	url = https://github.com/json-schema-org/JSON-Schema-Test-Suite.git

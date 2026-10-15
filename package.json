@@ -1,0 +1,85 @@
+{
+  "name": "json-schema-typed",
+  "description": "JSON Schema TypeScript definitions with complete inline documentation.",
+  "license": "BSD-3-Clause",
+  "version": "9.0.0",
+  "homepage": "https://github.com/RemyRylan/json-schema-typed",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RemyRylan/json-schema-typed.git"
+  },
+  "bugs": "https://github.com/RemyRylan/json-schema-typed/issues",
+  "author": {
+    "name": "Remy Rylan",
+    "url": "https://github.com/RemyRylan"
+  },
+  "type": "module",
+  "main": "./2020_12.js",
+  "types": "./2020_12.d.ts",
+  "exports": {
+    ".": {
+      "types": "./2020_12.d.ts",
+      "default": "./2020_12.js"
+    },
+    "./draft-07": {
+      "types": "./draft_07.d.ts",
+      "default": "./draft_07.js"
+    },
+    "./2019-09": {
+      "types": "./2019_09.d.ts",
+      "default": "./2019_09.js"
+    },
+    "./draft-2019-09": {
+      "types": "./draft_2019_09.d.ts",
+      "default": "./draft_2019_09.js"
+    },
+    "./2020-12": {
+      "types": "./2020_12.d.ts",
+      "default": "./2020_12.js"
+    },
+    "./draft-2020-12": {
+      "types": "./draft_2020_12.d.ts",
+      "default": "./draft_2020_12.js"
+    },
+    "./v1": {
+      "types": "./v1.d.ts",
+      "default": "./v1.js"
+    },
+    "./next": {
+      "types": "./next.d.ts",
+      "default": "./next.js"
+    }
+  },
+  "files": [
+    "/*.js",
+    "/*.d.ts"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build": "node --disable-warning=ExperimentalWarning src/build.ts",
+    "test": "npm run test:types && npm run test:runtime",
+    "test:types": "tsc -p tsconfig.json",
+    "test:runtime": "node --disable-warning=ExperimentalWarning --test \"test/*.test.ts\"",
+    "test:suite:generate": "node --disable-warning=ExperimentalWarning test/suite/generate.ts",
+    "check": "tsc -p tsconfig.json --noUnusedLocals --noUnusedParameters --noImplicitReturns --noFallthroughCasesInSwitch && tsc -p tsconfig.check.json",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "prettier": "^3.9.10",
+    "typescript": "^7.0.2",
+    "typescript5": "npm:typescript@^5.9.3"
+  },
+  "keywords": [
+    "jsonschema",
+    "typescript",
+    "types",
+    "definitions",
+    "json",
+    "schema"
+  ]
+}
